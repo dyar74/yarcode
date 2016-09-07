@@ -7,10 +7,10 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use frontend\assets\AppAsset;
+use frontend\assets\AgencyAsset;
 use kartik\alert\AlertBlock;
 
-AppAsset::register($this);
+AgencyAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
