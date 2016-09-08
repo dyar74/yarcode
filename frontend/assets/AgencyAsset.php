@@ -18,6 +18,7 @@ class AgencyAsset extends AppAsset
     public $baseUrl = '@web';
     public $css = [
         'css/agency.min.css',
+       // 'css/font-awesome.min.css'
     ];
     public $js = [
         'js/agency.min.js',
@@ -27,6 +28,7 @@ class AgencyAsset extends AppAsset
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-        'yii\bootstrap\BootstrapPluginAsset'
+        'yii\bootstrap\BootstrapPluginAsset',
+        'yarcode\fa\FontAwesomeBundle'
     ];
 }

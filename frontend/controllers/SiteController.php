@@ -12,6 +12,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
+use common\models\Service;
 
 /**
  * Site controller
@@ -21,6 +22,9 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
+
+    public $layout = 'agency';
+
     public function behaviors()
     {
         return ArrayHelper::merge(parent::behaviors(), [
@@ -67,7 +71,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $services = Service::find()->where(['status'=> Service::STATUS_ACTIVE])->all();
+        return $this->render('index', [
+            'services' => !empty($services) ? $services : null,
+        ]);
     }
 
     /**

@@ -33,6 +33,7 @@
                 'items' => [
                     ['label' => 'Main Menu', 'options' => ['class' => 'header']],
                     ['label' => 'Home', 'icon' => 'fa fa-home', 'url' => ['/site/index']],
+                    ['label' => 'Services', 'icon' => 'fa fa-square', 'url' => ['/service/index']],
                     ['label' => 'Change Password', 'icon' => 'fa fa-lock', 'url' => ['/profile/change-password']],
                 ],
             ]
