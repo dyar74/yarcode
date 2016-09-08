@@ -14,9 +14,14 @@ class m160908_131459_create_portfolio_table extends Migration
     {
         $this->createTable('portfolio', [
             'id' => $this->primaryKey(),
-            'title' => $this->string(100)->notNull(),
-            'image' => $this->string(100)->notNull(),
-            'display_order' => $this->integer(11)->notNull(),
+            'title' => $this->string()->notNull(),
+            'image' => $this->string()->notNull(),
+            'name' => $this->string()->notNull(),
+            'description' => $this->text(),
+            'date' => $this->date(),
+            'client' => $this->string(),
+            'category' => $this->string(),
+            'display_order' => $this->integer()->notNull(),
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime(),
             'status' => $this->integer()->defaultValue(0),
