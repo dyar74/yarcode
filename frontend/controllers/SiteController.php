@@ -72,6 +72,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $services = Service::find()->where(['status'=> Service::STATUS_ACTIVE])->all();
+     //   $portfolio = Portfolio::find()->active()->orderBy('display_order')->all();
         return $this->render('index', [
             'services' => !empty($services) ? $services : null,
         ]);

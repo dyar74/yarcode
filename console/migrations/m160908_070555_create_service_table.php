@@ -14,12 +14,12 @@ class m160908_070555_create_service_table extends Migration
     {
         $this->createTable('service', [
             'id' => $this->primaryKey(),
-            'title' => $this->string(100)->notNull(),
+            'title' => $this->string()->notNull(),
             'text' => $this->text()->notNull(),
-            'icon' => $this->string(100)->notNull(),
+            'icon' => $this->string()->notNull(),
             'created_at' => $this->dateTime(),
             'updated_at' => $this->dateTime(),
-            'status' => $this->status()->int(11)->defaultValue(0),
+            'status' => $this->integer()->defaultValue(0),
         ]);
     }
 

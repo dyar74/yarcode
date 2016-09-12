@@ -2,139 +2,50 @@
 /**
  * @var $this yii\web\View
  */
+use frontend\widgets\PortfoliosWidget;
 $this->title = 'Agency';
 ?>
 
 <!-- Services Section -->
 <section id="services">
     <div class="container">
-        <?php if (!is_null($services)) {?>
-        <div class="row">
+        <?php if (!is_null($services)) { ?>
+            <div class="row">
 
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Services</h2>
-                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Services</h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
             </div>
-        </div>
-        <div class="row text-center">
-            <?php
-                $count  = (int)(12/count($services));
+            <div class="row text-center">
+                <?php
+                $count = 1;
 
-            ?>
-            <?php foreach($services as $service) {?>
+                ?>
+                <?php foreach ($services as $service) { ?>
 
-            <div class="col-md-<?=$count;?>">
+                    <div class="col-md-4">
                     <span class="fa-stack fa-4x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa <?= $service->icon;?> fa-stack-1x fa-inverse"></i>
+                        <i class="fa <?= $service->icon; ?> fa-stack-1x fa-inverse"></i>
                     </span>
-                <h4 class="service-heading"><?= $service->title;?></h4>
-                <p class="text-muted"><?= $service->text;?></p>
+                        <h4 class="service-heading"><?= $service->title; ?></h4>
+                        <p class="text-muted"><?= $service->text; ?></p>
+                    </div>
+                    <?php
+                    $count++;
+                    if ((int)($count % 4) === 0) {
+                        echo "<div></div>";
+                    }
+                } ?>
             </div>
-            <?php }?>
-        </div>
-        <?php }?>
+        <?php } ?>
     </div>
 </section>
 
 <!-- Portfolio Grid Section -->
-<section id="portfolio" class="bg-light-gray">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Portfolio</h2>
-                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-6 portfolio-item">
-                <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/roundicons.png" class="img-responsive" alt="">
-                </a>
-                <div class="portfolio-caption">
-                    <h4>Round Icons</h4>
-                    <p class="text-muted">Graphic Design</p>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-                <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/startup-framework.png" class="img-responsive" alt="">
-                </a>
-                <div class="portfolio-caption">
-                    <h4>Startup Framework</h4>
-                    <p class="text-muted">Website Design</p>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-                <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/treehouse.png" class="img-responsive" alt="">
-                </a>
-                <div class="portfolio-caption">
-                    <h4>Treehouse</h4>
-                    <p class="text-muted">Website Design</p>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-                <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/golden.png" class="img-responsive" alt="">
-                </a>
-                <div class="portfolio-caption">
-                    <h4>Golden</h4>
-                    <p class="text-muted">Website Design</p>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-                <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/escape.png" class="img-responsive" alt="">
-                </a>
-                <div class="portfolio-caption">
-                    <h4>Escape</h4>
-                    <p class="text-muted">Website Design</p>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-                <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-                    <img src="img/portfolio/dreams.png" class="img-responsive" alt="">
-                </a>
-                <div class="portfolio-caption">
-                    <h4>Dreams</h4>
-                    <p class="text-muted">Website Design</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
+<?= PortfoliosWidget::widget(['view' => 'portfolios']); ?>
 <!-- About Section -->
 <section id="about">
     <div class="container">
@@ -149,7 +60,7 @@ $this->title = 'Agency';
                 <ul class="timeline">
                     <li>
                         <div class="timeline-image">
-                            <img class="img-circle img-responsive" src="img/about/1.jpg" alt="">
+                            <img class="img-circle img-responsive" src="/img/about/1.jpg" alt="">
                         </div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
@@ -157,13 +68,15 @@ $this->title = 'Agency';
                                 <h4 class="subheading">Our Humble Beginnings</h4>
                             </div>
                             <div class="timeline-body">
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut
+                                    voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit
+                                    vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
                             </div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
                         <div class="timeline-image">
-                            <img class="img-circle img-responsive" src="img/about/2.jpg" alt="">
+                            <img class="img-circle img-responsive" src="/img/about/2.jpg" alt="">
                         </div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
@@ -171,13 +84,15 @@ $this->title = 'Agency';
                                 <h4 class="subheading">An Agency is Born</h4>
                             </div>
                             <div class="timeline-body">
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut
+                                    voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit
+                                    vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="timeline-image">
-                            <img class="img-circle img-responsive" src="img/about/3.jpg" alt="">
+                            <img class="img-circle img-responsive" src="/img/about/3.jpg" alt="">
                         </div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
@@ -185,13 +100,15 @@ $this->title = 'Agency';
                                 <h4 class="subheading">Transition to Full Service</h4>
                             </div>
                             <div class="timeline-body">
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut
+                                    voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit
+                                    vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
                             </div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
                         <div class="timeline-image">
-                            <img class="img-circle img-responsive" src="img/about/4.jpg" alt="">
+                            <img class="img-circle img-responsive" src="/img/about/4.jpg" alt="">
                         </div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
@@ -199,7 +116,9 @@ $this->title = 'Agency';
                                 <h4 class="subheading">Phase Two Expansion</h4>
                             </div>
                             <div class="timeline-body">
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut
+                                    voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit
+                                    vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
                             </div>
                         </div>
                     </li>
@@ -228,7 +147,7 @@ $this->title = 'Agency';
         <div class="row">
             <div class="col-sm-4">
                 <div class="team-member">
-                    <img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
+                    <img src="/img/team/1.jpg" class="img-responsive img-circle" alt="">
                     <h4>Kay Garland</h4>
                     <p class="text-muted">Lead Designer</p>
                     <ul class="list-inline social-buttons">
@@ -243,7 +162,7 @@ $this->title = 'Agency';
             </div>
             <div class="col-sm-4">
                 <div class="team-member">
-                    <img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
+                    <img src="/img/team/2.jpg" class="img-responsive img-circle" alt="">
                     <h4>Larry Parker</h4>
                     <p class="text-muted">Lead Marketer</p>
                     <ul class="list-inline social-buttons">
@@ -258,7 +177,7 @@ $this->title = 'Agency';
             </div>
             <div class="col-sm-4">
                 <div class="team-member">
-                    <img src="img/team/3.jpg" class="img-responsive img-circle" alt="">
+                    <img src="/img/team/3.jpg" class="img-responsive img-circle" alt="">
                     <h4>Diana Pertersen</h4>
                     <p class="text-muted">Lead Developer</p>
                     <ul class="list-inline social-buttons">
@@ -274,7 +193,8 @@ $this->title = 'Agency';
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
-                <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+                <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque,
+                    laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
             </div>
         </div>
     </div>
@@ -285,22 +205,22 @@ $this->title = 'Agency';
         <div class="row">
             <div class="col-md-3 col-sm-6">
                 <a href="#">
-                    <img src="img/logos/envato.jpg" class="img-responsive img-centered" alt="">
+                    <img src="/img/logos/envato.jpg" class="img-responsive img-centered" alt="">
                 </a>
             </div>
             <div class="col-md-3 col-sm-6">
                 <a href="#">
-                    <img src="img/logos/designmodo.jpg" class="img-responsive img-centered" alt="">
+                    <img src="/img/logos/designmodo.jpg" class="img-responsive img-centered" alt="">
                 </a>
             </div>
             <div class="col-md-3 col-sm-6">
                 <a href="#">
-                    <img src="img/logos/themeforest.jpg" class="img-responsive img-centered" alt="">
+                    <img src="/img/logos/themeforest.jpg" class="img-responsive img-centered" alt="">
                 </a>
             </div>
             <div class="col-md-3 col-sm-6">
                 <a href="#">
-                    <img src="img/logos/creative-market.jpg" class="img-responsive img-centered" alt="">
+                    <img src="/img/logos/creative-market.jpg" class="img-responsive img-centered" alt="">
                 </a>
             </div>
         </div>
@@ -321,21 +241,25 @@ $this->title = 'Agency';
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name.">
+                                <input type="text" class="form-control" placeholder="Your Name *" id="name" required
+                                       data-validation-required-message="Please enter your name.">
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
+                                <input type="email" class="form-control" placeholder="Your Email *" id="email" required
+                                       data-validation-required-message="Please enter your email address.">
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                <input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required
+                                       data-validation-required-message="Please enter your phone number.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                <textarea class="form-control" placeholder="Your Message *" id="message" required
+                                          data-validation-required-message="Please enter a message."></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>

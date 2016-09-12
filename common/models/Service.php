@@ -80,7 +80,7 @@ class Service extends ActiveRecord
     {
         return [
             static::STATUS_ACTIVE => 'Active',
-            static::STATUS_NEW => 'Inactive',
+            static::STATUS_INACTIVE => 'Inactive',
         ];
     }
 }
