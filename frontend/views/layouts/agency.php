@@ -11,6 +11,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AgencyAsset;
 use frontend\widgets\PortfoliosWidget;
+use yii\helpers\Url;
 
 AgencyAsset::register($this);
 ?>
@@ -62,19 +63,19 @@ AgencyAsset::register($this);
                     <a href="#page-top"></a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#services">Services</a>
+                    <a class="page-scroll" href="/#services">Services</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#portfolio">Portfolio</a>
+                    <a class="page-scroll" href="/#portfolio">Portfolio</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#about">About</a>
+                    <a class="page-scroll" href="/#about">About</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#team">Team</a>
+                    <a class="page-scroll" href="/#team">Team</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#contact">Contact</a>
+                    <a class="page-scroll" href="/#contact">Contact</a>
                 </li>
             </ul>
         </div>
@@ -119,9 +120,9 @@ AgencyAsset::register($this);
             </div>
             <div class="col-md-4">
                 <ul class="list-inline quicklinks">
-                    <li><a href="#">Privacy Policy</a>
+                    <li> <?=Html::a('Privacy Policy', Yii::$app->urlManager->createUrl('/site/page/policy')) ;?>
                     </li>
-                    <li><a href="#">Terms of Use</a>
+                    <li><?=Html::a('Terms of Use',Yii::$app->urlManager->createUrl('/site/page/terms')) ;?>
                     </li>
                 </ul>
             </div>
