@@ -13,6 +13,7 @@ use frontend\assets\AgencyAsset;
 use frontend\widgets\PortfoliosWidget;
 use yii\helpers\Url;
 
+
 AgencyAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -120,9 +121,9 @@ AgencyAsset::register($this);
             </div>
             <div class="col-md-4">
                 <ul class="list-inline quicklinks">
-                    <li> <?=Html::a('Privacy Policy', Yii::$app->urlManager->createUrl('/site/page/policy')) ;?>
+                    <li> <?=Html::a('Privacy Policy', Yii::$app->urlManager->createUrl(['/site/page', 'view' => 'policy'])) ;?>
                     </li>
-                    <li><?=Html::a('Terms of Use',Yii::$app->urlManager->createUrl('/site/page/terms')) ;?>
+                    <li><?=Html::a('Terms of Use',Yii::$app->urlManager->createUrl(['/site/page', 'view' => 'terms'])) ;?>
                     </li>
                 </ul>
             </div>
