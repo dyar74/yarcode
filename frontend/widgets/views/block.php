@@ -29,8 +29,8 @@ foreach ($portfolios as $portfolio) {
                                 <?= !empty($portfolio->description) ? $portfolio->description : "" ?>
                                 <ul class="list-inline">
                                     <?php
-                                    echo !empty($porfolio->date) ? "<li>Date: " . $porfolio->date . "</li>" : "";
-                                    echo !empty($porfolio->client) ? "<li>Client: " . $porfolio->client . "</li>" : "";
+                                    echo !empty($portfolio->date) ? "<li>Date: " . date('F Y', strtotime($portfolio->date)) . "</li>" : "";
+                                    echo !empty($portfolio->client) ? "<li>Client: " . $portfolio->client . "</li>" : "";
                                     ?>
 
                                     <li>Category: <?= $portfolio->category ?></li>
