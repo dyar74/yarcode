@@ -14,6 +14,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use common\models\Service;
+use yii\widgets\ActiveForm;
+use yii\web\Response;
 
 /**
  * Site controller
@@ -163,23 +165,38 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+    public function actionValidate()
+    {
+        $model = new ContactForm();
+
+        if (yii::$app->request->isPost && $model->load(yii::$app->request->post())) {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+    }
     public function actionSendEmail() {
         $model = new ContactForm();
-        var_dump(yii::$app->request->post());
-        if (!empty(yii::$app->request->post())) {
-            $data = yii::$app->request->post();
-            $model->name = $data['name'];
-            $model->email = $data['email'];
-            $model->phone = $data['phone'];
-            $model->message = $data['message'];
-            if ($model->validate()) {
 
+        if (yii::$app->request->isPost && $model->load(yii::$app->request->post())) {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            $mailer = Yii::$app->get('mailer');
+            $body_text = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nName: $model->name\n\nEmail: $model->email\n\nPhone: $model->phone\n\nMessage:\n$model->message";
+            $message = $mailer->compose()
+                ->setFrom($model->email)
+                ->setTo(Yii::$app->params['adminEmail'] )
+                ->setSubject("Website Contact Form:  $model->name")
+                ->setTextBody($body_text );
+
+            if ($message->send()) {
+                Yii::info($body_text , 'sendEmail');
+                Yii::$app->getSession()->setFlash('success', 'Your message has been sent.');
             } else {
-                echo json_encode($model->errors);
+                Yii::error('error to send message from your website contact form' , 'errorEmail');
             }
-        } else throw new yii\base\Exception('Empty data');
 
-        return false;
+        }
+        return  $this->redirect('/site/index');
+        Yii::app()->end();
     }
 }
 

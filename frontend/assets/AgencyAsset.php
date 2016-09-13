@@ -10,6 +10,7 @@ namespace frontend\assets;
 
 
 use frontend\assets\AppAsset;
+use yii\jui\JuiAsset;
 
 
 class AgencyAsset extends AppAsset
@@ -22,11 +23,11 @@ class AgencyAsset extends AppAsset
     ];
     public $js = [
         'js/agency.min.js',
-        'js/contact_me.js',
-        'js/jqBootstrapValidation.js'
+
     ];
     public $depends = [
         'yii\web\YiiAsset',
+        'yii\jui\JuiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
         'yarcode\fa\FontAwesomeBundle'

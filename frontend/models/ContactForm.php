@@ -10,6 +10,7 @@ namespace frontend\models;
 use yii;
 use yii\base\Model;
 use borales\extensions\phoneInput\PhoneInputValidator;
+use borales\extensions\phoneInput\PhoneInputBehavior;
 
 class ContactForm extends Model
 {
@@ -22,6 +23,23 @@ class ContactForm extends Model
             [['phone'], 'string'],
             [['phone'], PhoneInputValidator::className()],
             ['email', 'email'],
+        ];
+    }
+    public function attributeLabels()
+    {
+        return [
+
+            'name' => Yii::t('app', 'Name'),
+            'email' => Yii::t('app', 'E-mail'),
+            'phone' => Yii::t('app', 'Contact Phone'),
+            'message' => Yii::t('app', 'Message'),
+
+        ];
+    }
+    public function behaviors()
+    {
+        return [
+            'phoneInput' => PhoneInputBehavior::className(),
         ];
     }
 

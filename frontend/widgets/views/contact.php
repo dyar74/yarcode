@@ -5,6 +5,11 @@
  * Date: 12.09.2016
  * Time: 22:16
  */
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use \yii\helpers\Url;
+use yii\widgets\Pjax;
+use borales\extensions\phoneInput\PhoneInput;
 ?>
 <!-- Contact Section -->
 <section id="contact">
@@ -17,39 +22,46 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <form name="sentMessage" id="contactForm" novalidate>
+                <?php Pjax::begin() ?>
+                <?php
+                $form = ActiveForm::begin([
+                    'id' => 'contact-form',
+                    'method' => 'post',
+                    'action' => Url::to(['/site/send-email']),
+                    'enableAjaxValidation' => true,
+                    'validationUrl' => Url::to(['/site/validate']),
+                    'options' => [
+                        'data-pjax' => true,
+                    ],
+                ]);
+                ?>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Your Name *" id="name" required
-                                       data-validation-required-message="Please enter your name.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Your Email *" id="email" required
-                                       data-validation-required-message="Please enter your email address.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group">
-                                <input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required
-                                       data-validation-required-message="Please enter your phone number.">
-                                <p class="help-block text-danger"></p>
-                            </div>
+                            <?= $form->field($model, 'name')->textInput(['placeholder' => Yii::t('app', 'Your Name')])->label(false) ?>
+                            <?= $form->field($model, 'email')->textInput(['placeholder' =>  Yii::t('app', 'Your Email')])->label(false) ?>
+                            <?= $form->field($model, 'phone')->widget(PhoneInput::className(), [
+                                'jsOptions' => [
+                                    'preferredCountries' => ['en', 'ru', 'ua'],
+                                    'autoHideDialCode' => false,
+                                    'nationalMode' => false,
+                                ]
+                            ])->label(false); ?>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <textarea class="form-control" placeholder="Your Message *" id="message" required
-                                          data-validation-required-message="Please enter a message."></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
+                            <?= $form->field($model, 'message')->textArea(['rows' => '6', 'placeholder' =>  Yii::t('app', 'Your Message')])->label(false); ?>
                         </div>
                         <div class="clearfix"></div>
                         <div class="col-lg-12 text-center">
                             <div id="success"></div>
-                            <button type="submit" class="btn btn-xl">Send Message</button>
+                            <?= Html::submitButton( Yii::t('app', 'Send Message'), ['class' =>  'btn btn-xl']) ?>
                         </div>
                     </div>
-                </form>
+
+
+
+                <?php ActiveForm::end(); ?>
+
+                <?php Pjax::end() ?>
             </div>
         </div>
     </div>

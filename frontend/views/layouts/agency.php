@@ -6,13 +6,12 @@
  * Time: 20:46
  */
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\bootstrap\Nav;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AgencyAsset;
 use frontend\widgets\PortfoliosWidget;
-use yii\helpers\Url;
-
+use kartik\alert\AlertBlock;
 
 AgencyAsset::register($this);
 ?>
@@ -44,46 +43,45 @@ AgencyAsset::register($this);
 <?php $this->beginBody() ?>
 
 
-
-
 <!-- Navigation -->
-<nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>
-        </div>
+<?php
+NavBar::begin([
+    'id' => 'mainNav',
+    'brandLabel' => 'Start Bootstrap',
+    'brandUrl' => '/#page-top',
+    'options' => ['class' =>'navbar navbar-default navbar-custom navbar-fixed-top' ],
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="hidden">
-                    <a href="#page-top"></a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="/#services">Services</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="/#portfolio">Portfolio</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="/#about">About</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="/#team">Team</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="/#contact">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-</nav>
+    ]);
+echo Nav::widget([
+     'items' => [
+        ['label' => '', 'url' => ['/#page-top'],
+            'options' => ['class' => 'hidden'],
+            'linkOptions' =>['class'=>'page-scroll']
+        ],
+        ['label' => 'Services', 'url' => ['/#services' ],
+            'linkOptions' =>['class'=>'page-scroll', 'data-target' => "#services"]
+        ],
+        ['label' => 'Portfolio', 'url' => ['/#portfolio'],
+            'linkOptions' =>['class'=>'page-scroll',  'data-target' => "#portfolio"]
+        ],
+        ['label' => 'About', 'url' => ['/#about'],
+            'linkOptions' =>['class'=>'page-scroll',  'data-target' => "#about"]
+        ],
+        ['label' => 'Team', 'url' => ['/#team'],
+            'linkOptions' =>['class'=>'page-scroll',  'data-target' => "#team"]
+        ],
+        ['label' => 'Contact', 'url' => ['/#contact'],
+            'linkOptions' =>['class'=>'page-scroll',  'data-target' => "#contact"]
+        ],
+    ],
+
+    'options' => [
+        'class' => 'nav navbar-nav navbar-right',
+    ],
+    'encodeLabels' => false,
+]);
+NavBar::end();
+?>
 
 <!-- Header -->
 <header>
@@ -96,7 +94,14 @@ AgencyAsset::register($this);
     </div>
 </header>
 <div class="container">
+    <?php foreach (Yii::$app->session->getAllFlashes() as $message):; ?>
 
+        <?= AlertBlock::widget([
+            'useSessionFlash' => true,
+            'type' => AlertBlock::TYPE_GROWL
+        ]); ?>
+
+    <?php endforeach; ?>
     <?= Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>

@@ -23,7 +23,24 @@ return [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['info'],
+                    'categories' => ['sendEmail'],
+                    'logFile' => '@frontend/runtime/logs/mail/mail.log',
+                    'maxFileSize' => 1024 * 2,
+                    'maxLogFiles' => 50,
+                ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['error'],
+                    'categories' => ['errorEmail'],
+                    'logFile' => '@frontend/runtime/logs/mail/error_mail.log',
+                    'maxFileSize' => 1024 * 2,
+                    'maxLogFiles' => 50,
+                ],
             ],
+
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
