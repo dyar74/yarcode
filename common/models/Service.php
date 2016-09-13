@@ -87,4 +87,13 @@ class Service extends ActiveRecord
             static::STATUS_INACTIVE => 'Inactive',
         ];
     }
+
+    public static function find()
+    {
+        return new ServiceQuery(get_called_class());
+    }
+
+    public static function getServices(){
+        return  self::find()->active()->all();
+    }
 }

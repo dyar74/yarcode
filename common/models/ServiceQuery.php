@@ -9,10 +9,10 @@ namespace common\models;
  */
 class ServiceQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
+    public function active()
     {
-        return $this->andWhere('[[status]]=1');
-    }*/
+        return $this->andWhere(['status' => Service::STATUS_ACTIVE]);
+    }
 
     /**
      * @inheritdoc
