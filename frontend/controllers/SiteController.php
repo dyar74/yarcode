@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\models\ContactForm;
 use yii;
 use frontend\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -161,6 +162,24 @@ class SiteController extends Controller
         return $this->render('reset-password', [
             'model' => $model,
         ]);
+    }
+    public function actionSendEmail() {
+        $model = new ContactForm();
+        var_dump(yii::$app->request->post());
+        if (!empty(yii::$app->request->post())) {
+            $data = yii::$app->request->post();
+            $model->name = $data['name'];
+            $model->email = $data['email'];
+            $model->phone = $data['phone'];
+            $model->message = $data['message'];
+            if ($model->validate()) {
+
+            } else {
+                echo json_encode($model->errors);
+            }
+        } else throw new yii\base\Exception('Empty data');
+
+        return false;
     }
 }
 

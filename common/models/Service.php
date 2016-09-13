@@ -4,7 +4,7 @@ namespace common\models;
 
 use Yii;
 use common\components\ActiveRecord;
-use backend\behaviors\TimestampBehavior;
+use yarcode\base\behaviors\TimestampBehavior;
 use yarcode\base\traits\StatusTrait;
 
 /**
@@ -72,7 +72,11 @@ class Service extends ActiveRecord
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        $behaviors['ts'] = TimestampBehavior::className();
+        $behaviors['ts'] = [
+            'class' => 'yarcode\base\behaviors\TimestampBehavior',
+            'createdAtAttribute' => 'created_at',
+            'updatedAtAttribute' => 'updated_at',
+        ];
         return $behaviors;
     }
 

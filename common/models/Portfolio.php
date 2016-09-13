@@ -4,8 +4,9 @@ namespace common\models;
 
 use Yii;
 use common\components\ActiveRecord;
-use backend\behaviors\TimestampBehavior;
+use yarcode\base\behaviors\TimestampBehavior;
 use yarcode\base\traits\StatusTrait;
+use yarcode\base\traits\CarbonModelTrait;
 
 /**
  * This is the model class for table "{{%portfolio}}".
@@ -27,6 +28,7 @@ class Portfolio extends \yii\db\ActiveRecord
 {
 
     use StatusTrait;
+    use CarbonModelTrait;
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
     /**
@@ -77,30 +79,25 @@ class Portfolio extends \yii\db\ActiveRecord
 
     public function behaviors()
     {
+        $behaviors = parent::behaviors();
+        $behaviors[] = [
 
-        return [
-            [
-
-                    'class' => 'backend\behaviors\TimestampBehavior',
-                    'attributes' => [
-                        ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
-                        ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
-                    ],
-
-
-            ],
-            [
-                'class' => '\yiidreamteam\upload\ImageUploadBehavior',
-                'attribute' => 'image',
-                'thumbs' => [
-                    'thumb' => ['width' => 400, 'height' => 300],
-                ],
-                'filePath' => Yii::getAlias('@frontend') .'/web/img/portfolio/[[pk]].[[extension]]',
-                'fileUrl' =>  Yii::$app->params['frontend_base_url'] . '/img/portfolio/[[pk]].[[extension]]',
-                'thumbPath' => Yii::getAlias('@frontend') .'/web/img/portfolio/[[profile]]_[[pk]].[[extension]]',
-                'thumbUrl' =>  Yii::$app->params['frontend_base_url'] . '/img/portfolio/[[profile]]_[[pk]].[[extension]]',
-            ],
+            'class' => 'yarcode\base\behaviors\TimestampBehavior',
+            'createdAtAttribute' => 'created_at',
+            'updatedAtAttribute' => 'updated_at',
         ];
+        $behaviors[] = [
+            'class' => '\yiidreamteam\upload\ImageUploadBehavior',
+            'attribute' => 'image',
+            'thumbs' => [
+                'thumb' => ['width' => 400, 'height' => 300],
+            ],
+            'filePath' => Yii::getAlias('@frontend') .'/web/img/portfolio/[[pk]].[[extension]]',
+            'fileUrl' =>  Yii::$app->params['frontend_base_url'] . '/img/portfolio/[[pk]].[[extension]]',
+            'thumbPath' => Yii::getAlias('@frontend') .'/web/img/portfolio/[[profile]]_[[pk]].[[extension]]',
+            'thumbUrl' =>  Yii::$app->params['frontend_base_url'] . '/img/portfolio/[[profile]]_[[pk]].[[extension]]',
+        ];
+        return $behaviors;
     }
     public static function getStatusLabels()
     {
