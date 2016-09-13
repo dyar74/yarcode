@@ -93,7 +93,7 @@ NavBar::end();
         </div>
     </div>
 </header>
-<div class="container">
+
     <?php foreach (Yii::$app->session->getAllFlashes() as $message):; ?>
 
         <?= AlertBlock::widget([
@@ -106,7 +106,7 @@ NavBar::end();
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
     <?= $content ?>
-</div>
+
 
 <footer>
     <div class="container">
